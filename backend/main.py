@@ -1,0 +1,81 @@
+from dotenv import load_dotenv
+import os
+from supabase import create_client, Client
+from flask import Flask, render_template, request, abort, jsonify
+from flask_cors import CORS
+import logging
+load_dotenv()
+
+app = Flask(__name__)
+CORS(app, origins=["http://localhost:5173"])
+app.static_folder = 'static'
+
+supabase: Client = create_client(os.environ.get("PROJECT_URL"), os.environ.get("API_KEY"))
+
+
+@app.route('/todo/create', methods=["POST"])
+def todo_create():
+    data = request.get_json()
+    desc = data.get('desc')
+    try:
+        response = supabase.table('todo').insert({'desc' : desc}).execute()
+        return jsonify(response.data[0]), 200
+    except Exception as e:
+        print(e) 
+        raise abort(500, description='Internal server error occurred!')
+
+@app.route('/todo')
+def get_todos():
+    try:
+        current = supabase.table('todo').select('*').eq('completed', False).execute()
+        completed = supabase.table('todo').select('*').eq('completed', True).execute()
+        return jsonify({'current':current.data, 'completed' : completed.data})
+    except Exception as e:
+        print(e) 
+        raise abort(500, description='Internal server error occurred!')
+
+@app.route('/todo/mark', methods=["POST"])
+def mark_todo():
+    try:
+        data = request.get_json()
+        task_id = data.get('task_id')
+        supabase.table('todo').update({'completed':True}).match({'id' : task_id}).execute()
+        current = supabase.table('todo').select('*').eq('completed', False).execute()
+        completed = supabase.table('todo').select('*').eq('completed', True).execute()
+
+        return jsonify({'current':current.data, 'completed' : completed.data})
+    except Exception as e:
+        print(e) 
+        raise abort(500, description='Internal server error occurred!')
+    
+
+@app.route('/todo/unmark', methods=["POST"])
+def unmark_todo():
+    try:
+        data = request.get_json()
+        task_id = data.get('task_id')
+        supabase.table('todo').update({'completed':False}).match({'id' : task_id}).execute()
+        current = supabase.table('todo').select('*').eq('completed', False).execute()
+        completed = supabase.table('todo').select('*').eq('completed', True).execute()
+
+        return jsonify({'current':current.data, 'completed' : completed.data})
+    except Exception as e:
+        print(e) 
+        raise abort(500, description='Internal server error occurred!')
+
+@app.route('/todo/del', methods=["POST"])
+def delete_todo():
+    try:
+        data = request.get_json()
+        completed = data.get('completed')
+        task_id = data.get('task_id')
+        supabase.table('todo').delete().match({'id' : task_id, 'completed' : completed}).execute()
+        todos = supabase.table('todo').select('*').eq('completed', completed).execute()
+        if completed: return jsonify({'completed' : todos.data})
+        else : return jsonify({'current' : todos.data})
+    except Exception as e:
+        print(e) 
+        raise abort(500, description='Internal server error occurred!')
+
+if __name__ == "__main__":
+    app.run(debug=True)

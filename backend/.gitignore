@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment directory
+venv/
+.env
+
+# Secret or sensitive information
+instance/
+
+# Logs and other generated files
+*.log
+*.pot
+*.po
+*.mo
+*.tmp
+*.swp
+*.db
+
+# Configuration files
+*.ini
+
+# Dependencies
+*.egg-info/
