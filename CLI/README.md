@@ -1,5 +1,3 @@
- ** **Here's the documentation for the CLI application:**
-
 **Description:**
 
 This command-line interface (CLI) tool allows you to manage your to-do tasks effectively. It interacts with a Todo API (at http://127.0.0.1:5000) to create, view, mark, unmark, and delete tasks, keeping you organized and on top of your to-do list.
@@ -47,4 +45,3 @@ python CLI.py [command] [options]
 
 - The CLI relies on a functioning Todo API at http://127.0.0.1:5000.
 - Error handling for API interactions is limited to a generic "some error occurred" message.
-- Consider using more specific error handling for a user-friendly experience.

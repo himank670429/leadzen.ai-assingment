@@ -89,7 +89,7 @@ function App() {
 						</a>
 						<a
 							className="border-purple shadow border-2 p-2 text-purple inline-flex items-center gap-2 rounded-md hover:translate-y-[-2px] transition-transform"
-							href="#"
+							href="https://github.com/himank670429/leadzen.ai-assingment"
 							target="_blank"
 						>
 							<i className="fa-brands fa-github"></i>
