@@ -75,7 +75,7 @@ The folder consists of three folder :-
   ```
 - CLI
   ```bash
-  cd CLU
+  cd CLI
   python CLI.py -h
   ```
 
