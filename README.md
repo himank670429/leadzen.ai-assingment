@@ -8,7 +8,6 @@ The folder consists of three folder :-
 
 - `backend` - The server of todo app written in Python.
 - `frontend` - The frontend of the todo app, made using frontend web technologies `React+Vite` and `Tailwind`
-- `CLI` - CLI version of todo.
 
 ---
 
@@ -73,10 +72,5 @@ The folder consists of three folder :-
   cd frontend
   npm run dev
   ```
-- CLI
-  ```bash
-  cd CLI
-  python CLI.py -h
-  ```
 
-**Note :- make sure to run the `backend` first before running front-end or CLI**
+**Note :- the backend will server the static file for the front-end but if want to run front-end seperately then you can do it.**

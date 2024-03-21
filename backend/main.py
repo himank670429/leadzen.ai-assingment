@@ -1,9 +1,9 @@
 from dotenv import load_dotenv
 import os
 from supabase import create_client, Client
-from flask import Flask, render_template, request, abort, jsonify
+from flask import Flask, request, abort, jsonify, send_file, send_from_directory
 from flask_cors import CORS
-import logging
+from mimetypes import MimeTypes
 load_dotenv()
 
 app = Flask(__name__)
@@ -11,6 +11,20 @@ CORS(app, origins=["http://localhost:5173"])
 app.static_folder = 'static'
 
 supabase: Client = create_client(os.environ.get("PROJECT_URL"), os.environ.get("API_KEY"))
+
+
+# mimetypes config
+mime = MimeTypes()
+
+@app.route('/')
+def index():
+    return send_from_directory('static', 'index.html')
+
+@app.route("/<path:filename>")
+def serve_static(filename):
+    content_type, _= mime.guess_type(filename)
+    return send_file(f'static/{filename}', mimetype=content_type)
+
 
 
 @app.route('/todo/create', methods=["POST"])
