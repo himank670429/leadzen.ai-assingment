@@ -90,6 +90,3 @@ def delete_todo():
     except Exception as e:
         print(e) 
         raise abort(500, description='Internal server error occurred!')
-
-if __name__ == "__main__":
-    app.run(debug=True)
