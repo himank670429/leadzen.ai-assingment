@@ -66,7 +66,6 @@ function App() {
 			return updated_todos;
 		});
 	}
-	console.log(todos);
 	return (
 		<div className="container  h-screen flex flex-col">
 			<Header />
