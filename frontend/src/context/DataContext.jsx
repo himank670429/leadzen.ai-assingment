@@ -3,7 +3,7 @@ import { useState, useEffect, createContext, useContext } from "react";
 export const DataContext = createContext();
 import axios from "axios";
 export default function DataProvider({ children }) {
-	const instance = axios.create({ baseURL: "http://127.0.0.1:5000/" });
+	const instance = axios.create({ baseURL: import.meta.env.MODE === "development" ? "http://127.0.0.1:5000/" : "" });
 	const [todos, setTodos] = useState({
 		current: [],
 		completed: [],
