@@ -4,7 +4,6 @@
 
 #### project hosted on url :- [https://leadzen-ai-assingment.onrender.com/](https://leadzen-ai-assingment.onrender.com/)
 
-
 # Project Folder Structure
 
 The folder consists of three folder :-
