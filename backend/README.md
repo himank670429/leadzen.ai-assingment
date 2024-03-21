@@ -2,7 +2,6 @@
 
 This API provides a set of RESTful endpoints for managing a to-do list. It interacts with a Supabase database to store and retrieve tasks.
 
-project hosted on url :- [https://leadzen-ai-assingment.onrender.com/](https://leadzen-ai-assingment.onrender.com/)
 
 **Prerequisites:**
 
